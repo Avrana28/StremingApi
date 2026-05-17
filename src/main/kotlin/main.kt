@@ -12,8 +12,6 @@ fun main(args: Array<String>) {
 
 fun Application.module(){
 
-    //install(PartialContent)
-    //install(AutoHeadResponse)
     install(ContentNegotiation){
         json()
     }

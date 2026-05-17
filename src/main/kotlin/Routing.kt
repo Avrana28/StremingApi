@@ -34,7 +34,14 @@ fun Application.configureRouting() {
             }
         }
         get("/stream/{fileName}") {
-            /*TODO make the stream function*/
+            val fileName = call.parameters["fileName"] ?: return@get call.respond(HttpStatusCode.BadRequest)
+            val videFile = File(System.getenv("VIDEOS_DIR"), fileName)
+
+            if (videFile.exists() && videFile.isFile){
+                call.respond(videFile)
+            } else{
+                call.respond(HttpStatusCode.NotFound)
+            }
         }
 
         get("/thumb/{thumbName}"){
