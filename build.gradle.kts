@@ -2,6 +2,7 @@
 plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(ktorLibs.plugins.ktor)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 group = "com.streaming"
@@ -15,6 +16,8 @@ kotlin {
     jvmToolchain(21)
 }
 dependencies {
+    implementation(ktorLibs.server.contentNegotiation)
+    implementation(ktorLibs.serialization.kotlinx.json)
     implementation(ktorLibs.server.autoHeadResponse)
     implementation(ktorLibs.server.config.yaml)
     implementation(ktorLibs.server.core)

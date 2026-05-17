@@ -1,8 +1,9 @@
 ktor:
   deployment:
-    port: 8080
+    port: 5050
   application:
     modules:
+      - com.streaming.MainKt.module
       - com.streaming.HttpKt.configureHttp
       - com.streaming.AutoHeadResponseKt.configureAutoHeadResponse
       - com.streaming.RoutingKt.configureRouting

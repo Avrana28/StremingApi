@@ -1,0 +1,41 @@
+services:
+  duckdns:
+    image: lscr.io/linuxserver/duckdns:latest
+    container_name: duckdns-straming
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - SUBDOMAINS=my-kotlin-api
+      - TOKEN=9361979c-ea51-4763-98e3-3f34bcb65598
+    restart: unless-stopped
+
+  nginx-proxy:
+    image: 'jc21/nginx-proxy-manager:latest'
+    restart: unless-stopped
+    ports:
+      - '8080:80'
+      - '8443:443'
+      - '881:81'
+    volumes:
+      - ./nginx/data/:/data
+      - ./nginx/letsencrypt:/etc/letsencrypt
+    networks:
+      - streaming-network
+
+  video-api:
+    build: .
+    image: streamingapi-video-api:latest
+    ports:
+      - "5050:5050"
+    volumes:
+      - ./Videos:/app/videos
+      - ./Thumbnails:/app/thumb
+    environment:
+      - VIDEOS_DIR=/app/videos
+    networks:
+      - streaming-network
+
+networks:
+  streaming-network:
+    driver: bridge

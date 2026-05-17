@@ -1,5 +1,6 @@
 package com.streaming.utils
 
+import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 
 @Serializable

@@ -1,11 +1,10 @@
 package com.streaming
 
-import io.ktor.server.engine.*
 import io.ktor.server.application.*
+import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.plugins.autohead.AutoHeadResponse
 import io.ktor.server.plugins.partialcontent.PartialContent
-import io.ktor.server.routing.get
-import io.ktor.server.routing.routing
+import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
 
 fun main(args: Array<String>) {
     io.ktor.server.netty.EngineMain.main(args)
@@ -13,8 +12,11 @@ fun main(args: Array<String>) {
 
 fun Application.module(){
 
-    install(PartialContent)
-
-    install(AutoHeadResponse)
+    //install(PartialContent)
+    //install(AutoHeadResponse)
+    install(ContentNegotiation){
+        json()
+    }
+    configureRouting()
 
 }
