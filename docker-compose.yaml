@@ -6,8 +6,8 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Etc/UTC
-      - SUBDOMAINS=my-kotlin-api
-      - TOKEN=9361979c-ea51-4763-98e3-3f34bcb65598
+      - SUBDOMAINS=`Your domain`
+      - TOKEN=`Your token`
     restart: unless-stopped
 
   nginx-proxy:
